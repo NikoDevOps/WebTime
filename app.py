@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 def update_time():
     while True:
         now = datetime.now().strftime('%H:%M:%S')
-        socketio.emit('update_time', {'time': now}, broadcast=True)
+        socketio.emit('update_time', {'time': now}, namespace='/')
         logger.info(f'Updated time: {now}')
         time.sleep(1)
 
