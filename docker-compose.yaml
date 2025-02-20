@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   webtime:
-    build: .
+    image: ghcr.io/nikodevops/webtime:v1.0
     ports:
       - "5000:5000"
     restart: always
