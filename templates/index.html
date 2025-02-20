@@ -31,8 +31,8 @@
         });
 
         socket.on('update_time', function(data) {
-            document.getElementById('time').textContent = data.time;
             console.log("⏰ Received time update:", data.time);
+            document.getElementById('time').textContent = data.time;
         });
 
         socket.on('disconnect', function() {

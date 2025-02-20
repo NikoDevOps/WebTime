@@ -8,15 +8,14 @@ import threading
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode="eventlet")
 
-
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
 logger = logging.getLogger(__name__)
 
 def update_time():
     while True:
         now = datetime.now().strftime('%H:%M:%S')
-        socketio.emit('update_time', {'time': now}, namespace='/')
-        logger.info(f'Updated time: {now}')
+        socketio.emit('update_time', {'time': now}, namespace='/', broadcast=True)
+        logger.info(f'Sent time update: {now}')
         time.sleep(1)
 
 @app.route('/')
@@ -26,6 +25,7 @@ def index():
 @socketio.on('connect')
 def handle_connect():
     logger.info(f'Client connected')
+    emit('update_time', {'time': datetime.now().strftime('%H:%M:%S')})
 
 @socketio.on('disconnect')
 def handle_disconnect():
