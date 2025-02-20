@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from flask_socketio import SocketIO
+from flask_socketio import SocketIO, emit
 from datetime import datetime
 import logging
 import time
@@ -14,8 +14,8 @@ logger = logging.getLogger(__name__)
 def update_time():
     while True:
         now = datetime.now().strftime('%H:%M:%S')
-        socketio.emit('update_time', {'time': now}, namespace='/', broadcast=True)
-        logger.info(f'Sent time update: {now}')
+        socketio.emit('update_time', {'time': now}, namespace='/')
+        logger.info(f'Updated time: {now}')
         time.sleep(1)
 
 @app.route('/')
