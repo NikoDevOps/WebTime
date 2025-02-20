@@ -15,15 +15,17 @@
             background-color: #f5f5f5;
         }
         #time {
-            font-size: 3rem;
+            font-size: 4rem;
             color: #333;
         }
     </style>
 </head>
 <body>
     <div id="time">Loading...</div>
+
     <script>
         var socket = io();
+
         socket.on('update_time', function(data) {
             document.getElementById('time').textContent = data.time;
         });
