@@ -12,7 +12,7 @@ env:
 jobs:
   ci:
     name: CI
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Git clone
